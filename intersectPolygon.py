@@ -6,10 +6,10 @@ print ("Content-type: application/json")
 print
 
 def buildJSONReturn(theURL, finalGeo):
-    #theURL = 'http://2k8salmon1:6080/arcgis/rest/services/landview2014/mndnr_adminfeatures/MapServer/1/query'
+    # theURL = 'http://2k8salmon1:6080/arcgis/rest/services/landview2014/mndnr_adminfeatures/MapServer/1/query'
     #finalGeo = {'rings': [[[375365.337450312,5321585.17834946], [376486.680253649,5321585.17834946], [376486.680253649,5320748.67825179], [375365.337450312,5320748.67825179], [375365.337450312,5321585.17834946]]]}
     geomUrl = 'http://2k8salmon1:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer/intersect'
-    areaUrl = 'http://2k8salmon1:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer/areasAndLengths'    
+    areaUrl = 'http://2k8salmon1:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer/areasAndLengths'
     data = []   # Blank Dictionary to populate with return
     theParams = urllib.urlencode({
         'f': "pjson",
@@ -24,7 +24,7 @@ def buildJSONReturn(theURL, finalGeo):
     try:
         dataReturn =  urlData['features']
         sr = urlData['spatialReference']
-   
+
     except:
         print "No features"
 
@@ -79,7 +79,7 @@ def buildJSONReturn(theURL, finalGeo):
     #Create the JSON format and return
     jDict = json.dumps(data)
     return(jDict)
-    
+
 #Main Code Block
 #-----------------------
 #Create instance for storage
@@ -102,8 +102,8 @@ elif featureName == 'ParksTrails':
 elif featureName == 'Waters':
     theDataUrl = 'http://2k8salmon1:6080/arcgis/rest/services/landview2014/mndnr_adminfeatures/MapServer/1/query'
 elif featureName == 'Wildlife':
-    theDataUrl = 'http://2k8salmon1:6080/arcgis/rest/services/landview2014/mndnr_adminfeatures/MapServer/1/query'    
+    theDataUrl = 'http://2k8salmon1:6080/arcgis/rest/services/landview2014/mndnr_adminfeatures/MapServer/1/query'
 else:
     theDataUrl = ''
-    
+
 print buildJSONReturn(theDataUrl, finalGeo)  #function for getting json query return
