@@ -64,11 +64,16 @@ def main():
     #     GDRS_UTIL.ZipDir(folder_to_zip, archive_to_create)
 
     # There are some quirks to constructing paths in Windows, since you can't put a backslash
-    # at the end of a path component. The method here is robust.
+    # at the end of a path component (e.g 'D:\' is not allowed) .
+    # The method below is most robust, but you could also use: r'D:\Users\hawatson\_GISTemp\Hal11'
+    # which is what you see in a lot of ArcGIS example documentation
     folder_to_zip = os.path.join('D:', os.sep,  'Users', 'hawatson', '_GISTemp', 'Hal11')
+
+    # Here we construct the full path to the final .zip arcive
     zip_filename = "backup_" + date_time_stamp + ".zip"
     archive_to_create = os.path.join('D:', os.sep, 'Users', 'hawatson', '_GISTemp', zip_filename)
-    print archive_to_create
+
+    # And call the function in the GDRS_UTIL module (gdrs_utility_functions)
     GDRS_UTIL.ZipDir(folder_to_zip, archive_to_create)
 
 
